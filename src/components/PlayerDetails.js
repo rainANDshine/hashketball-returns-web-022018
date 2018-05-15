@@ -1,9 +1,11 @@
 import React from 'react'
 import { Card, Image } from 'semantic-ui-react'
-
-const PlayerDetails = ({ selectedPlayer }) => {
+import {connect} from 'react-redux'
+import {selectPlayer} from '../actions'
+const PlayerDetails = ({ selectedPlayer, closeCard}) => {
   return (
     <Card
+      onClick={closeCard}
       className='player-details'>
       <Image src='http://www.burkenc.org/assets/PublishingImages/Parks%20and%20Rec/Basketball.png'/>
       <Card.Header>
@@ -23,7 +25,15 @@ const PlayerDetails = ({ selectedPlayer }) => {
   )
 }
 
-export default PlayerDetails
+function mapDispatchToProps(dispatch){
+  return {
+    closeCard: () => {
+      dispatch(selectPlayer(null))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(PlayerDetails)
 
 {/* <div>
   <img src={selectedPlayer.image_url}></img>
